@@ -22,7 +22,7 @@ msg = ''
 utils = None
 escaperoom = None
 playing = False
-bully_lines = ['Euhm, {{TEAM}} is ondertussen al door de eerste opdracht']
+bully_lines = ['Euhm, {{TEAM}} heeft al een opdracht afgerond', 'Zijn jullie soms in slaap gevallen? {{TEAM}} heeft weer een deur geopend']
 
 
 @client.event
@@ -58,6 +58,8 @@ async def on_message(message):
                     await channel.send(split[0] + team + split[1])
                 else:
                     await channel.send(msg)
+        if message.content == '!scores' or message.content == '!scores':
+            await message.channel.send(escaperoom.get_scores())
         elif message.content == '!roles' or message.content == '!Roles':
             channel = client.get_channel(705172201472524300)
             await channel.send('Duid hier onder jouw team aan, dan zal ik er voor zorgen dat je in de juiste chats '
@@ -93,6 +95,7 @@ async def on_message(message):
                                    'KP en de Hagar nog op slot... \nEnkel dankzij jullie kunnen we (hopelijk) zo snel '
                                    'mogelijk beginnen aan de cantus. Jullie eerste opdracht is vrij simpel, ... , '
                                    '\n\nVeel succes!')
+            escaperoom.start()
             playing = True
         elif message.content == '!Stop' or message.content == '!stop':
             for team, data in team_channels.items():
