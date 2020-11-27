@@ -14,5 +14,6 @@ class Utils:
             reply += '\n- `!start`: Het spel wordt gestart en de eerste opdracht word gestuurd.'
             reply += '\n- `!clear`: De team kanalen worden volledig leeg gemaakt.'
             reply += '\n- `!roles`: Er word een bericht in `Algemeen` gestuurd, de leden kunnen zo hun rollen toewijzen.'
+            reply += '\n- `!stop`: Er word een bericht gestuurd waarin techinsche problemen gemeld worden.'
             reply += '\n- `{{TEAM_NAME}}`: Dit kan je in je bericht plaatsen, wanneer het dan verstuurd word zal dit aangepast worden naar de team naam.'
             return reply
