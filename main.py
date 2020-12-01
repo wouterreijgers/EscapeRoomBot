@@ -14,12 +14,67 @@ client = discord.Client()
 alive = True
 channels = []
 team_channels = {
-    'Team 1': {
-        'channel_id': 774404823155474483},
-    'Team 2': {
-        'channel_id': 774607191105077258},
-    'Team 3': {
-        'channel_id': 774607276559958026}}
+    'Zeeroverslied': {
+        'channel_id': 774404823155474483,
+        'role_id': 774611033137610772},
+    'De Blauwvoet': {
+        'channel_id': 774607191105077258,
+        'role_id': 774611220274741282},
+    'Het zwartbruine bier': {
+        'channel_id': 774607276559958026,
+        'role_id': 774611272327102464},
+    'Het loze vissertje': {
+        'channel_id': 783423234959343667,
+        'role_id': 783421970683265065},
+    'Die Rietjie': {
+        'channel_id': 783424010309599336,
+        'role_id': 783422443120754710},
+    'My Bonnie': {
+        'channel_id': 783424285774577674,
+        'role_id': 783422798612922378},
+    'Loch Lomon': {
+        'channel_id': 783424477093822494,
+        'role_id': 783422918452707378},
+    'Clementine': {
+        'channel_id': 783424702013636779,
+        'role_id': 783422952552923147},
+    'Alouette': {
+        'channel_id': 783427974786580553,
+        'role_id': 783426346528538684},
+    'Juchheidi': {
+        'channel_id': 783428086746185828,
+        'role_id': 783426393740148748},
+    'Krambambouli': {
+        'channel_id': 783428189108043786,
+        'role_id': 783426450996985867},
+    'Pintjedrinken': {
+        'channel_id': 783428322368815155,
+        'role_id': 783426786604220417},
+    'Ein Prosit': {
+        'channel_id': 783428445543596062,
+        'role_id': 783426836511326269},
+    'Al boven door het vensterken': {
+        'channel_id': 783428582448824344,
+        'role_id': 783426870288973875},
+    'Het Kikkerlied': {
+        'channel_id': 783428689307762728,
+        'role_id': 783426949904728104},
+    'Sarie Marais': {
+        'channel_id': 783428806937018398,
+        'role_id': 783427001247465492},
+    'The wild rover': {
+        'channel_id': 783429057752203294,
+        'role_id': 783427054767046666},
+    'Uilenspiegel': {
+        'channel_id': 783429162060349440,
+        'role_id': 783427088367353937},
+    'When Johnny comes marching home': {
+        'channel_id': 783429261847035984,
+        'role_id': 783427130800472114},
+    'Der Pappenheimer': {
+        'channel_id': 783429351584694282,
+        'role_id': 783427212401049680},
+}
 different_rooms = {
     'kp': {
         'channel_id': 781912997173919811},
@@ -38,8 +93,8 @@ msg = ''
 utils = None
 escaperoom = None
 playing = False
-bully_lines = ['Euhm, {{TEAM}} heeft al een opdracht afgerond',
-               'Zijn jullie soms in slaap gevallen? {{TEAM}} heeft weer een deur geopend', 'Willen jullie soms dat {{TEAM}} wint?']
+bully_lines = ['Euhm, team {{TEAM}} heeft al een opdracht afgerond',
+               'Zijn jullie soms in slaap gevallen? Team {{TEAM}} heeft weer een deur geopend', 'Willen jullie soms dat team {{TEAM}} wint?']
 
 memes = ['meme0.png', 'meme1.jpg', 'meme2.jpg', 'meme3.png', 'meme4.jpg', 'meme0.png', 'meme6.jpg', 'meme7.jpg', 'meme8.jpg', 'meme9.jpg', 'meme10.jpg', 'meme11.jpg', 'meme12.jpg']
 @client.event
@@ -61,6 +116,20 @@ async def on_message(message):
     # Make sure the bot doesn't replies to other bots
     if message.author == client.user or message.author.bot:
         return
+    # Admin functies
+    if message.channel.id == 705172201472524300:  # is id van 'send-to-all' channel
+        msg = message.content.lower().replace(" ", '')
+        #print(msg)
+        for team, role in team_channels.items():
+            team_name = team.lower().replace(" ", '')
+            #print(team_name)
+            if team_name in msg:
+                role = message.author.guild.get_role(role['role_id'])
+                await message.author.add_roles(role)
+        msg = await message.channel.history(limit=1).flatten()
+        await message.channel.delete_messages(msg)
+        role = message.author.guild.get_role(781913353944563732)
+        await message.author.add_roles(role)
 
     # Algemene functies die altijd werken
     if not playing or message.channel.id == 774633121122484244:
@@ -97,7 +166,7 @@ async def on_message(message):
         elif message.content == '!Welkom' or message.content == '!welkom':
             for team, data in team_channels.items():
                 channel = client.get_channel(data['channel_id'])
-                await channel.send('Hey ' + team + ', \nWelkom bij de Ingenium Escape Room, ik heb zojuist het '
+                await channel.send('Hey team ' + team + ', \nWelkom bij de Ingenium Escape Room, ik heb zojuist het '
                                                    'signaal gekregen dat ik de gasten mag welkom heten en het spel mag uitleggen! '
                                                    ':partying_face:\n\nBij deze, Welkom allemaal! De escaperoom deze avond zal '
                                                    'volledig gehost worden door mij. De geweldige mensen van Ingenium staan uiteraard '
@@ -182,6 +251,7 @@ async def on_message(message):
             return
         correct, new_status, team_win, response, door_opened = escaperoom.process(message)
         print(correct, new_status, team_win, response, door_opened)
+        await message.channel.send(response)
         if correct:
             if 'hagar' == door_opened:
                 role = message.author.guild.get_role(781966223105720331)
@@ -200,15 +270,16 @@ async def on_message(message):
                     for member in message.author.voice.channel.members:
                         await member.add_roles(role)
                 channel = client.get_channel(different_rooms['bot_channel']['channel_id'])
+                await channel.send('bot ' + str(message.channel.id) + ' conv_all')
+            if 'kp' == door_opened:
+                channel = client.get_channel(different_rooms['bot_channel']['channel_id'])
                 await channel.send('bot ' + str(message.channel.id) + ' conv_wc')
-
             parts = bully_lines[random.randint(0, len(bully_lines) - 1)].split('{{TEAM}}')
             tekst = parts[0] + team_win + parts[1]
             for team, data in team_channels.items():
                 if not team_win == team:
                     channel = client.get_channel(data['channel_id'])
                     await channel.send(tekst)
-        await message.channel.send(response)
 
 
 @client.event

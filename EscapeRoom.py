@@ -10,7 +10,7 @@ class EscapeRoom:
         # 1, hagar open
 
         self.team_channels = {
-            'Team 1': {
+            'Zeeroverslied': {
                 'channel_id': 774404823155474483,
                 'status': [],
                 'current_tips': [],
@@ -24,7 +24,7 @@ class EscapeRoom:
                 'meme_count': 0,
                 'final_score': 0,
             },
-            'Team 2': {
+            'De Blauwvoet': {
                 'channel_id': 774607191105077258,
                 'status': [],
                 'current_tips': [],
@@ -39,7 +39,7 @@ class EscapeRoom:
                 'final_score': 0,
 
             },
-            'Team 3': {
+            'Het zwartbruine bier': {
                 'channel_id': 774607276559958026,
                 'status': [],
                 'current_tips': [],
@@ -53,7 +53,263 @@ class EscapeRoom:
                 'meme_count': 0,
                 'final_score': 0,
 
-            }}
+            },
+            'Het loze vissertje': {
+                'channel_id': 783423234959343667,
+                'status': [],
+                'current_tips': [],
+                'tip_count': {'hagar': 0,
+                              'biokot': 0,
+                              'kp': 0,
+                              'wc': 0,
+                              'vatenkot': 0},
+                'total_tips': 0,
+                'duration': time(),
+                'meme_count': 0,
+                'final_score': 0,
+
+            },
+            'Die Rietjie': {
+                'channel_id': 783424010309599336,
+                'status': [],
+                'current_tips': [],
+                'tip_count': {'hagar': 0,
+                              'biokot': 0,
+                              'kp': 0,
+                              'wc': 0,
+                              'vatenkot': 0},
+                'total_tips': 0,
+                'duration': time(),
+                'meme_count': 0,
+                'final_score': 0,
+
+            },
+            'My Bonnie': {
+                'channel_id': 783424285774577674,
+                'status': [],
+                'current_tips': [],
+                'tip_count': {'hagar': 0,
+                              'biokot': 0,
+                              'kp': 0,
+                              'wc': 0,
+                              'vatenkot': 0},
+                'total_tips': 0,
+                'duration': time(),
+                'meme_count': 0,
+                'final_score': 0,
+
+            },
+            'Loch Lomon': {
+                'channel_id': 783424477093822494,
+                'status': [],
+                'current_tips': [],
+                'tip_count': {'hagar': 0,
+                              'biokot': 0,
+                              'kp': 0,
+                              'wc': 0,
+                              'vatenkot': 0},
+                'total_tips': 0,
+                'duration': time(),
+                'meme_count': 0,
+                'final_score': 0,
+
+            },
+            'Clementine': {
+                'channel_id': 783424702013636779,
+                'status': [],
+                'current_tips': [],
+                'tip_count': {'hagar': 0,
+                              'biokot': 0,
+                              'kp': 0,
+                              'wc': 0,
+                              'vatenkot': 0},
+                'total_tips': 0,
+                'duration': time(),
+                'meme_count': 0,
+                'final_score': 0,
+
+            },
+            'Alouette': {
+                'channel_id': 783427974786580553,
+                'status': [],
+                'current_tips': [],
+                'tip_count': {'hagar': 0,
+                              'biokot': 0,
+                              'kp': 0,
+                              'wc': 0,
+                              'vatenkot': 0},
+                'total_tips': 0,
+                'duration': time(),
+                'meme_count': 0,
+                'final_score': 0,
+
+            },
+            'Juchheidi': {
+                'channel_id': 783428086746185828,
+                'status': [],
+                'current_tips': [],
+                'tip_count': {'hagar': 0,
+                              'biokot': 0,
+                              'kp': 0,
+                              'wc': 0,
+                              'vatenkot': 0},
+                'total_tips': 0,
+                'duration': time(),
+                'meme_count': 0,
+                'final_score': 0,
+
+            },
+            'Krambambouli': {
+                'channel_id': 783428189108043786,
+                'status': [],
+                'current_tips': [],
+                'tip_count': {'hagar': 0,
+                              'biokot': 0,
+                              'kp': 0,
+                              'wc': 0,
+                              'vatenkot': 0},
+                'total_tips': 0,
+                'duration': time(),
+                'meme_count': 0,
+                'final_score': 0,
+
+            },
+            'Pintjedrinken': {
+                'channel_id': 783428322368815155,
+                'status': [],
+                'current_tips': [],
+                'tip_count': {'hagar': 0,
+                              'biokot': 0,
+                              'kp': 0,
+                              'wc': 0,
+                              'vatenkot': 0},
+                'total_tips': 0,
+                'duration': time(),
+                'meme_count': 0,
+                'final_score': 0,
+
+            },
+            'Ein Prosit': {
+                'channel_id': 783428445543596062,
+                'status': [],
+                'current_tips': [],
+                'tip_count': {'hagar': 0,
+                              'biokot': 0,
+                              'kp': 0,
+                              'wc': 0,
+                              'vatenkot': 0},
+                'total_tips': 0,
+                'duration': time(),
+                'meme_count': 0,
+                'final_score': 0,
+
+            },
+            'Al boven door het vensterken': {
+                'channel_id': 783428582448824344,
+                'status': [],
+                'current_tips': [],
+                'tip_count': {'hagar': 0,
+                              'biokot': 0,
+                              'kp': 0,
+                              'wc': 0,
+                              'vatenkot': 0},
+                'total_tips': 0,
+                'duration': time(),
+                'meme_count': 0,
+                'final_score': 0,
+
+            },
+            'Het Kikkerlied': {
+                'channel_id': 783428689307762728,
+                'status': [],
+                'current_tips': [],
+                'tip_count': {'hagar': 0,
+                              'biokot': 0,
+                              'kp': 0,
+                              'wc': 0,
+                              'vatenkot': 0},
+                'total_tips': 0,
+                'duration': time(),
+                'meme_count': 0,
+                'final_score': 0,
+
+            },
+            'Sarie Marais': {
+                'channel_id': 783428806937018398,
+                'status': [],
+                'current_tips': [],
+                'tip_count': {'hagar': 0,
+                              'biokot': 0,
+                              'kp': 0,
+                              'wc': 0,
+                              'vatenkot': 0},
+                'total_tips': 0,
+                'duration': time(),
+                'meme_count': 0,
+                'final_score': 0,
+
+            },
+            'The wild rover': {
+                'channel_id': 783429057752203294,
+                'status': [],
+                'current_tips': [],
+                'tip_count': {'hagar': 0,
+                              'biokot': 0,
+                              'kp': 0,
+                              'wc': 0,
+                              'vatenkot': 0},
+                'total_tips': 0,
+                'duration': time(),
+                'meme_count': 0,
+                'final_score': 0,
+
+            },
+            'Uilenspiegel': {
+                'channel_id': 783429162060349440,
+                'status': [],
+                'current_tips': [],
+                'tip_count': {'hagar': 0,
+                              'biokot': 0,
+                              'kp': 0,
+                              'wc': 0,
+                              'vatenkot': 0},
+                'total_tips': 0,
+                'duration': time(),
+                'meme_count': 0,
+                'final_score': 0,
+
+            },
+            'When Johnny comes marching home': {
+                'channel_id': 783429261847035984,
+                'status': [],
+                'current_tips': [],
+                'tip_count': {'hagar': 0,
+                              'biokot': 0,
+                              'kp': 0,
+                              'wc': 0,
+                              'vatenkot': 0},
+                'total_tips': 0,
+                'duration': time(),
+                'meme_count': 0,
+                'final_score': 0,
+
+            },
+            'Der Pappenheimer': {
+                'channel_id': 783429351584694282,
+                'status': [],
+                'current_tips': [],
+                'tip_count': {'hagar': 0,
+                              'biokot': 0,
+                              'kp': 0,
+                              'wc': 0,
+                              'vatenkot': 0},
+                'total_tips': 0,
+                'duration': time(),
+                'meme_count': 0,
+                'final_score': 0,
+
+            },
+        }
         self.keys = ['Yorben', 'Yorben Joosen', 'yorben', 'yorben joosen', 's', 'S', '2256',
                      'Yorben - Bas - Simon - Thomas - Siebe - Jaro - Wout', 'Yorben-Bas-Simon-Thomas-Siebe-Jaro-Wout',
                      'yorben - bas - simon - thomas - siebe - jaro - wout', 'yorben-bas-simon-thomas-siebe-jaro-wout']
@@ -103,8 +359,8 @@ class EscapeRoom:
         self.start_time = time()
 
     def process(self, message):
-        print(self.team_channels['Team 1'])
         for team, data in self.team_channels.items():
+            print(team)
             if data['channel_id'] == message.channel.id:
                 # Check if code is correct
                 if message.content == '!help' or message.content == '!Help':
@@ -113,6 +369,7 @@ class EscapeRoom:
                     return False, 0, 0, self.tip(team, data, message.content), ''
                 elif message.content in self.keys or message.content in self.keys_kp:
                     # Juist geraden! Dit moet verwerkt worden.
+                    print(self.keys[:4])
                     if message.content in self.keys[:4] and 'hagar' not in data['status']:
                         data['status'].append('hagar')
                         return True, data['status'], team, self.replies[0], 'hagar'
@@ -135,7 +392,7 @@ class EscapeRoom:
                     return False, 0, 0, self.failwords[random.randint(0, len(self.failwords) - 1)], ''
 
     def set_points(self, team, data):
-        reply = 'Proficiat ' + team + ', \n'
+        reply = 'Proficiat team' + team + ', \n'
         reply += 'Dankzij jullie zal onze cantus kunnen doorgaan!\n'
         data['duration'] = time() - self.start_time
         reply += 'In totaal deden jullie er ' + str(
@@ -162,7 +419,7 @@ class EscapeRoom:
         pass
 
     def help_menu(self, team, data):
-        reply = 'Hey ' + team + ', \nDit is wat ik zoal kan:'
+        reply = 'Hey team ' + team + ', \nDit is wat ik zoal kan:'
         reply += '\n`!help`: brengt je hier'
         reply += '\n`!meme`: Geeft je een toffe meme zodat je even kan ontspannen, geen zorgen de bot ruimt alles mooi weer op!'
         reply += '\n`!tip [NAAM VAN EEN KAMER]`: Ik bezorg je dan een tip, deze zullen wel meegerekend worden in de eindscore!'
