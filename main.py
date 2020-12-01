@@ -39,12 +39,12 @@ utils = None
 escaperoom = None
 playing = False
 bully_lines = ['Euhm, {{TEAM}} heeft al een opdracht afgerond',
-               'Zijn jullie soms in slaap gevallen? {{TEAM}} heeft weer een deur geopend']
+               'Zijn jullie soms in slaap gevallen? {{TEAM}} heeft weer een deur geopend', 'Willen jullie soms dat {{TEAM}} wint?']
 
-
+memes = ['meme0.png', 'meme1.jpg', 'meme2.jpg', 'meme3.png', 'meme4.jpg', 'meme0.png', 'meme6.jpg', 'meme7.jpg', 'meme8.jpg', 'meme9.jpg', 'meme10.jpg', 'meme11.jpg', 'meme12.jpg']
 @client.event
 async def on_message(message):
-    global msg, alive, team_channels, utils, escaperoom, playing
+    global msg, alive, team_channels, utils, escaperoom, playing, memes
     print(message)
 
     # This part is the 'emergency' part, sometimes the bot starts freaking out so by typing '!KILL' the bot stops sending messages.
@@ -104,8 +104,8 @@ async def on_message(message):
                                                    'klaar om in te grijpen maar dat is hopelijk niet nodig. Straks begin ik met de '
                                                    'eerte opdracht uit te leggen. Indien jullie een antwoord denken te weten dan mag '
                                                    'je dat hier onder typen en zal ik feedback geven. Je kan ook tips vragen maar '
-                                                   'hier hangt uiteraard een straftijd aan vast. Een tip vragen kan je doen door !tip '
-                                                   'te typen.\n\nOhja, als er iets onduidelijk is kan je altijd `!help` typen, '
+                                                   'hier hangt uiteraard een straftijd aan vast. Een tip vragen kan je doen door !tip [KAMER NAAM] '
+                                                   'te typen. Het is belangrijk om te weten dat alle bots mee doen!\n\nOhja, als er iets onduidelijk is van zodra het spel gestart is kan je altijd `!help` typen, '
                                                    'ik vat dan even mijn functies.\n\nVeel succes!\n\n(Het startsignaal word zometeen '
                                                    'gegeven)')
 
@@ -122,29 +122,32 @@ async def on_message(message):
                                    '\n\nVeel succes!')
             channel = client.get_channel(different_rooms['wc']['channel_id'])
             await channel.send('\nEr hangt een cijferslot aan de deur naar de wc’s. De kans is groot dat een zatte '
-                               'WINAKKER dat daar voor de lol heeft gehangen. Zoals er nog steeds een Ingeniumsticker '
+                               'WINAKKER dat daar voor de lol heeft gehangen, net zoals er nog steeds een Ingeniumsticker '
                                'ergens in de wc’s van de Hagar plakt. Om het slot te openen hebben jullie een code '
                                'nodig van vier cijfers. Wat een geluk dat deze zatte plezante ook nog het volgende op '
                                'de deur heeft geschreven: a+bc-d². Waarschijnlijk dacht deze persoon dat hij of zij '
                                'de code de volgende ochtend niet meer zou weten. \n\nMeer info heb ik helaas ook '
                                'niet, ik heb wel de handleiding van het slot online gevonden: '
-                               'https://drive.google.com/file/d/1I_MyLb_7Npn2UHel90NYjr2bdJBfyKK-/view?usp=sharing ')
+                               'https://drive.google.com/file/d/1cawHFXVcOlh_EdkY2_xWziazR_WuZvEd/view?usp=sharing ')
             channel = client.get_channel(different_rooms['biokot']['channel_id'])
-            await channel.send('\n5CPP+Q8    :16u Engineers of Tomorrow vergadering'
+            await channel.send('\n5C46+98    :10u Bloed geven'
+                               '\n5CPP+Q8    :16u Engineers of Tomorrow vergadering'
                                '\n59CV+8R    :12u30 Pizza’s bestellen'
                                '\n4FV8+R4    :8u30 Kaaskroketten ophalen'
-                               '\n5C46+98    :10u Bloed geven'
                                '\n59FW+XF    :13u snacks, prijzen voor bingo'
                                '\n4CJV+MP    :8u Micro ophalen'
                                '\n5CQG+33    :15u Pintje om ons stamcafé te steunen'
                                '\n5C84+XF    :11u Bak-voorbereiding'
                                '\n5CMC+J5    :14u Middageten'
                                '\n4FXM+P3    :9u Ingenium-emmers ophalen')
+            channel = client.get_channel(different_rooms['bot_channel']['channel_id'])
+            await channel.send('bot emma '+str(different_rooms['kp']['channel_id'])+' kp')
             channel = client.get_channel(different_rooms['hagar']['channel_id'])
             await channel.send('\nKennen jullie Emma al? Ze is ons nieuwste praesidium lid en zal ons helpen '
                                'vanavond. Net zoals de meesten komt ook Emma met fiets naar de KP. Soms doet ze al '
-                               'eens een wedstrijdje “om ter snelste thuis” met andere mensen die even ver moeten als '
-                               'zij.')
+                               'eens een wedstrijdje “om ter snelste thuis” met de bot die even ver moet als '
+                               'zij. \n\n ps: je kan de bots in privé sturen, als je de juiste vragen stelt zullen ze antwoorden!')
+            await channel.send(file=discord.File('map.png'))
             channel = client.get_channel(different_rooms['vatenkot']['channel_id'])
             await channel.send('\nDe cantus kan bijna starten, alleen moet iedereen nog even gaan zitten! Geef de '
                                'volgorde als volgt door: persoon-persoon-persoon want anders snap ik er niets van')
@@ -172,24 +175,26 @@ async def on_message(message):
         # (Is the answer correct?, In what phase of the game are they now?, did they answer correctly?)
         if message.content == '!meme' or message.content == '!Meme':
             meme = escaperoom.meme(message)
-            await message.channel.send(file=discord.File('meme0.jpg'))
-            await asyncio.sleep(2)
+            await message.channel.send(file=discord.File(memes[meme]))
+            await asyncio.sleep(4)
             msg = await message.channel.history(limit=2).flatten()
             await message.channel.delete_messages(msg)
             return
         correct, new_status, team_win, response, door_opened = escaperoom.process(message)
+        print(correct, new_status, team_win, response, door_opened)
         if correct:
             if 'hagar' == door_opened:
                 role = message.author.guild.get_role(781966223105720331)
-                if message.author.voice:
-                    for member in message.author.voice.channel.members:
-                        await member.add_roles(role)()
+                print(message.author.voice.channel.members)
+                for member in message.author.voice.channel.members:
+                    print(member)
+                    await member.add_roles(role)
                 channel = client.get_channel(different_rooms['bot_channel']['channel_id'])
                 await channel.send('bot ' + str(message.channel.id) + ' conv_hagar')
             if 'biokot' == door_opened:
                 channel = client.get_channel(different_rooms['bot_channel']['channel_id'])
                 await channel.send('bot ' + str(message.channel.id) + ' conv_biokot')
-            if 'wc' == door_opened:
+            if 'wc' in new_status and 'biokot' in new_status:
                 role = message.author.guild.get_role(781989687023763457)
                 if message.author.voice:
                     for member in message.author.voice.channel.members:
