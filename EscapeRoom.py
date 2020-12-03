@@ -309,6 +309,21 @@ class EscapeRoom:
                 'final_score': 0,
 
             },
+            'Annemarieken': {
+                'channel_id': 784152092973596723,
+                'status': [],
+                'current_tips': [],
+                'tip_count': {'hagar': 0,
+                              'biokot': 0,
+                              'kp': 0,
+                              'wc': 0,
+                              'vatenkot': 0},
+                'total_tips': 0,
+                'duration': time(),
+                'meme_count': 0,
+                'final_score': 0,
+
+            },
         }
         self.keys = ['Yorben', 'Yorben Joosen', 'yorben', 'yorben joosen', 's', 'S', '2256',
                      'Yorben - Bas - Simon - Thomas - Siebe - Jaro - Wout', 'Yorben-Bas-Simon-Thomas-Siebe-Jaro-Wout',
@@ -392,7 +407,7 @@ class EscapeRoom:
                     return False, 0, 0, self.failwords[random.randint(0, len(self.failwords) - 1)], ''
 
     def set_points(self, team, data):
-        reply = 'Proficiat team' + team + ', \n'
+        reply = 'Proficiat team ' + team + ', \n'
         reply += 'Dankzij jullie zal onze cantus kunnen doorgaan!\n'
         data['duration'] = time() - self.start_time
         reply += 'In totaal deden jullie er ' + str(
@@ -415,7 +430,7 @@ class EscapeRoom:
                  'aankondigen! Alvast bedankt om mee te spelen en indien je nog graag wat blijft napraten dan kan dat ' \
                  'uiteraard! '
         data['final_score'] = data['duration']
-        return True, data['status'], team, reply, ''
+        return True, data['status'], team, reply, 'vatenkot'
         pass
 
     def help_menu(self, team, data):

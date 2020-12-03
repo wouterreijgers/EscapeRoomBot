@@ -53,6 +53,9 @@ team_channels = {
     'Ein Prosit': {
         'channel_id': 783428445543596062,
         'role_id': 783426836511326269},
+    'Annemarieken': {
+        'channel_id': 784152092973596723,
+        'role_id': 784151819400118352},
     'Al boven door het vensterken': {
         'channel_id': 783428582448824344,
         'role_id': 783426870288973875},
@@ -97,9 +100,11 @@ bully_lines = ['Euhm, team {{TEAM}} heeft al een opdracht afgerond',
                'Zijn jullie soms in slaap gevallen? Team {{TEAM}} heeft weer een deur geopend', 'Willen jullie soms dat team {{TEAM}} wint?']
 
 memes = ['meme0.png', 'meme1.jpg', 'meme2.jpg', 'meme3.png', 'meme4.jpg', 'meme0.png', 'meme6.jpg', 'meme7.jpg', 'meme8.jpg', 'meme9.jpg', 'meme10.jpg', 'meme11.jpg', 'meme12.jpg']
+user_names = []
+
 @client.event
 async def on_message(message):
-    global msg, alive, team_channels, utils, escaperoom, playing, memes
+    global msg, alive, team_channels, utils, escaperoom, playing, memes, user_names
     print(message)
 
     # This part is the 'emergency' part, sometimes the bot starts freaking out so by typing '!KILL' the bot stops sending messages.
@@ -119,17 +124,21 @@ async def on_message(message):
     # Admin functies
     if message.channel.id == 705172201472524300:  # is id van 'send-to-all' channel
         msg = message.content.lower().replace(" ", '')
-        #print(msg)
-        for team, role in team_channels.items():
-            team_name = team.lower().replace(" ", '')
-            #print(team_name)
-            if team_name in msg:
-                role = message.author.guild.get_role(role['role_id'])
-                await message.author.add_roles(role)
+        if not message.author in user_names:
+            for team, role in team_channels.items():
+                team_name = team.lower().replace(" ", '')
+                #print(team_name)
+                if team_name in msg:
+                    # TODO: zorgen dat iedereen max1 rol krijgt
+                    role = message.author.guild.get_role(role['role_id'])
+                    await message.author.add_roles(role)
+                    role = message.author.guild.get_role(781913353944563732)
+                    await message.author.add_roles(role)
+                    user_names.append(message.author)
+
         msg = await message.channel.history(limit=1).flatten()
         await message.channel.delete_messages(msg)
-        role = message.author.guild.get_role(781913353944563732)
-        await message.author.add_roles(role)
+
 
     # Algemene functies die altijd werken
     if not playing or message.channel.id == 774633121122484244:
@@ -152,17 +161,14 @@ async def on_message(message):
             await message.channel.send(escaperoom.get_scores())
         elif message.content == '!roles' or message.content == '!Roles':
             channel = client.get_channel(705172201472524300)
-            await channel.send('Duid hier onder jouw team aan, dan zal ik er voor zorgen dat je in de juiste chats '
-                               'terechtkomt! Weet je niet bij welk team je hoort? Stuur dan even een bericht naar de '
-                               'helpdesk.')
-            m = channel.last_message
-            emoji = '1️⃣'
-            await m.add_reaction(emoji)
-            emoji = '2️⃣'
-            await m.add_reaction(emoji)
-            emoji = '3️⃣'
-            await m.add_reaction(emoji)
-            print(m)
+            await channel.send('Normaal gezien hebben jullie via mail een geheime code gekregen, stuur deze code hieronder en dan weet ik meteen waar ik je naartoe kan brengen! Indien er een probleem is stuur dan even een berichtje in de helpdesk.  Alvast veel succes!!!\n\n(ps: Je kan maar 1 keer sturen dus zorg dat je het juiste liedje ingeeft)')
+            # m = channel.last_message
+            # emoji = '1️⃣'
+            # await m.add_reaction(emoji)
+            # emoji = '2️⃣'
+            # await m.add_reaction(emoji)
+            # emoji = '3️⃣'
+            # await m.add_reaction(emoji)
         elif message.content == '!Welkom' or message.content == '!welkom':
             for team, data in team_channels.items():
                 channel = client.get_channel(data['channel_id'])
@@ -173,9 +179,9 @@ async def on_message(message):
                                                    'klaar om in te grijpen maar dat is hopelijk niet nodig. Straks begin ik met de '
                                                    'eerte opdracht uit te leggen. Indien jullie een antwoord denken te weten dan mag '
                                                    'je dat hier onder typen en zal ik feedback geven. Je kan ook tips vragen maar '
-                                                   'hier hangt uiteraard een straftijd aan vast. Een tip vragen kan je doen door !tip [KAMER NAAM] '
+                                                   'hier hangt uiteraard een straftijd aan vast. Een tip vragen kan je doen door `!tip [KAMER NAAM]` '
                                                    'te typen. Het is belangrijk om te weten dat alle bots mee doen!\n\nOhja, als er iets onduidelijk is van zodra het spel gestart is kan je altijd `!help` typen, '
-                                                   'ik vat dan even mijn functies.\n\nVeel succes!\n\n(Het startsignaal word zometeen '
+                                                   'ik vat dan even mijn functies. Owja, nog iets belangrijk! Iedereen kan maar 1 bericht per 10 seconden sturen dus gokken heeft geen zin! :stuck_out_tongue: \n\nVeel succes!\n\n(Het startsignaal word zometeen '
                                                    'gegeven)')
 
 
@@ -187,7 +193,7 @@ async def on_message(message):
                                    'KP en de Hagar nog op slot... \nEnkel dankzij jullie kunnen we (hopelijk) zo snel '
                                    'mogelijk beginnen aan de cantus. Zoals jullie kunnen zien zijn er enkele kanalen '
                                    'zichtbaar geworden, hier verschijnen jullie opdrachten. Waneer je een antwoord '
-                                   'hebt gevonden dan stuur je dat hier! '
+                                   'hebt gevonden dan stuur je dat hier! Iedere kamer heeft 1 opdracht, van zodra je deze kamer geopend hebt kan je dit kanaal vergeten '
                                    '\n\nVeel succes!')
             channel = client.get_channel(different_rooms['wc']['channel_id'])
             await channel.send('\nEr hangt een cijferslot aan de deur naar de wc’s. De kans is groot dat een zatte '
@@ -230,7 +236,7 @@ async def on_message(message):
         elif message.content == '!Clear' or message.content == '!clear':
             for team, data in team_channels.items():
                 channel = client.get_channel(data['channel_id'])
-                messages = await channel.history().flatten()
+                messages = await channel.history(limit=1000).flatten()
                 await channel.delete_messages(messages)
             for team, data in different_rooms.items():
                 channel = client.get_channel(data['channel_id'])
@@ -264,16 +270,24 @@ async def on_message(message):
             if 'biokot' == door_opened:
                 channel = client.get_channel(different_rooms['bot_channel']['channel_id'])
                 await channel.send('bot ' + str(message.channel.id) + ' conv_biokot')
-            if 'wc' in new_status and 'biokot' in new_status:
+            if 'wc' in new_status and 'kp' in new_status and 'vatenkot' not in new_status:
                 role = message.author.guild.get_role(781989687023763457)
                 if message.author.voice:
                     for member in message.author.voice.channel.members:
                         await member.add_roles(role)
                 channel = client.get_channel(different_rooms['bot_channel']['channel_id'])
                 await channel.send('bot ' + str(message.channel.id) + ' conv_all')
-            if 'kp' == door_opened:
+            if 'kp' == door_opened and 'wc' not in new_status:
                 channel = client.get_channel(different_rooms['bot_channel']['channel_id'])
                 await channel.send('bot ' + str(message.channel.id) + ' conv_wc')
+            if 'wc' == door_opened and 'kp' not in new_status:
+                channel = client.get_channel(different_rooms['bot_channel']['channel_id'])
+                await channel.send('bot ' + str(message.channel.id) + ' conv_wc')
+            if 'vatenkot' == door_opened:
+                role = message.author.guild.get_role(784144194330689556)
+                if message.author.voice:
+                    for member in message.author.voice.channel.members:
+                        await member.add_roles(role)
             parts = bully_lines[random.randint(0, len(bully_lines) - 1)].split('{{TEAM}}')
             tekst = parts[0] + team_win + parts[1]
             for team, data in team_channels.items():
