@@ -77,6 +77,12 @@ team_channels = {
     'Der Pappenheimer': {
         'channel_id': 783429351584694282,
         'role_id': 783427212401049680},
+    'De slag om het Gravensteen': {
+        'channel_id': 784174195407585333,
+        'role_id': 784173690195542077},
+    'Nummerlieke': {
+        'channel_id': 784173911499735060,
+        'role_id': 784173784487165982},
 }
 different_rooms = {
     'kp': {
@@ -193,17 +199,19 @@ async def on_message(message):
                                    'KP en de Hagar nog op slot... \nEnkel dankzij jullie kunnen we (hopelijk) zo snel '
                                    'mogelijk beginnen aan de cantus. Zoals jullie kunnen zien zijn er enkele kanalen '
                                    'zichtbaar geworden, hier verschijnen jullie opdrachten. Waneer je een antwoord '
-                                   'hebt gevonden dan stuur je dat hier! Iedere kamer heeft 1 opdracht, van zodra je deze kamer geopend hebt kan je dit kanaal vergeten '
+                                   'hebt gevonden dan stuur je dat hier! Iedere kamer heeft 1 opdracht, van zodra je '
+                                   'deze kamer geopend hebt kan je die ruimte vergeten '
                                    '\n\nVeel succes!')
             channel = client.get_channel(different_rooms['wc']['channel_id'])
             await channel.send('\nEr hangt een cijferslot aan de deur naar de wc’s. De kans is groot dat een zatte '
-                               'WINAKKER dat daar voor de lol heeft gehangen, net zoals er nog steeds een Ingeniumsticker '
+                               'WINAKker dat daar voor de lol heeft gehangen, net zoals er nog steeds een '
+                               'Ingeniumsticker '
                                'ergens in de wc’s van de Hagar plakt. Om het slot te openen hebben jullie een code '
                                'nodig van vier cijfers. Wat een geluk dat deze zatte plezante ook nog het volgende op '
                                'de deur heeft geschreven: a+bc-d². Waarschijnlijk dacht deze persoon dat hij of zij '
                                'de code de volgende ochtend niet meer zou weten. \n\nMeer info heb ik helaas ook '
                                'niet, ik heb wel de handleiding van het slot online gevonden: '
-                               'https://drive.google.com/file/d/1cawHFXVcOlh_EdkY2_xWziazR_WuZvEd/view?usp=sharing ')
+                               'https://drive.google.com/file/d/1upGiAFJL--MXJlKuXfB3rjyMQnR2CmBi/view?usp=sharing ')
             channel = client.get_channel(different_rooms['biokot']['channel_id'])
             await channel.send('\n5C46+98    :10u Bloed geven'
                                '\n5CPP+Q8    :16u Engineers of Tomorrow vergadering'
@@ -221,7 +229,8 @@ async def on_message(message):
             await channel.send('\nKennen jullie Emma al? Ze is ons nieuwste praesidium lid en zal ons helpen '
                                'vanavond. Net zoals de meesten komt ook Emma met fiets naar de KP. Soms doet ze al '
                                'eens een wedstrijdje “om ter snelste thuis” met de bot die even ver moet als '
-                               'zij. \n\n ps: je kan de bots in privé sturen, als je de juiste vragen stelt zullen ze antwoorden!')
+                               'zij. Op de kaart staan de woonplaatsen van onze bots aangeduid! \n\n ps: je kan de '
+                               'bots in privé sturen, als je de juiste vragen stelt zullen ze antwoorden!')
             await channel.send(file=discord.File('map.png'))
             channel = client.get_channel(different_rooms['vatenkot']['channel_id'])
             await channel.send('\nDe cantus kan bijna starten, alleen moet iedereen nog even gaan zitten! Geef de '

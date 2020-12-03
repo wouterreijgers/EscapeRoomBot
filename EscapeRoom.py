@@ -324,8 +324,38 @@ class EscapeRoom:
                 'final_score': 0,
 
             },
+            'De slag om het Gravensteen': {
+                'channel_id': 784174195407585333,
+                'status': [],
+                'current_tips': [],
+                'tip_count': {'hagar': 0,
+                              'biokot': 0,
+                              'kp': 0,
+                              'wc': 0,
+                              'vatenkot': 0},
+                'total_tips': 0,
+                'duration': time(),
+                'meme_count': 0,
+                'final_score': 0,
+
+            },
+            'Nummerlieke': {
+                'channel_id': 784173911499735060,
+                'status': [],
+                'current_tips': [],
+                'tip_count': {'hagar': 0,
+                              'biokot': 0,
+                              'kp': 0,
+                              'wc': 0,
+                              'vatenkot': 0},
+                'total_tips': 0,
+                'duration': time(),
+                'meme_count': 0,
+                'final_score': 0,
+
+            },
         }
-        self.keys = ['Yorben', 'Yorben Joosen', 'yorben', 'yorben joosen', 's', 'S', '2256',
+        self.keys = ['Yorben', 'Yorben Joosen', 'yorben', 'yorben joosen', 's', 'S', '2241',
                      'Yorben - Bas - Simon - Thomas - Siebe - Jaro - Wout', 'Yorben-Bas-Simon-Thomas-Siebe-Jaro-Wout',
                      'yorben - bas - simon - thomas - siebe - jaro - wout', 'yorben-bas-simon-thomas-siebe-jaro-wout']
         self.failwords = ['Nope',
@@ -335,9 +365,15 @@ class EscapeRoom:
                           'Seriously?',
                           'omfg, zijn jullie zelfs aan het proberen?',
                           'Hoe komde daar zelfs op?',
-                          '']
+                          'Heb je de opgaven wel gelezen?',
+                          'Denken jullie eigenlijk na?',
+                          'Aan dit tempo zijn jullie morgen nog bezig',
+                          'Lies doet zelfs sneller een adje dan dat jullie dit raadsel oplossen',
+                          'Zzzz, Maak je me nu wakker voor een fout antwoord?']
         self.replies = [
-            'Proficiat, jullie hebben den Hagar opengekregen, maar we zijn hier nog niet klaar. Van hieruit zullen jullie de wc’s moeten vrijmaken en de deur naar de KP moet ook opengezet worden uiteraard. Misschien kan Emma Peeters jullie hier wel mee helpen.',
+            'Proficiat, jullie hebben den Hagar opengekregen, maar we zijn hier nog niet klaar. Van hieruit zullen '
+            'jullie de wc’s moeten vrijmaken en de deur naar de KP moet ook opengezet worden uiteraard. Misschien kan '
+            'Emma Peeters jullie hier wel mee helpen.',
             'Amai, zalig jullie hebben het biokot geopend!',
             'Huh? Het lijk wel of ik mijn opdrachten te makkelijk heb gemaakt!',
             'De KP is nu ook geopend! Kei goed, van zodra het vatenkot ook open is dan kunnen we beginnen aan de '
@@ -359,10 +395,12 @@ class EscapeRoom:
                 'wc': {
                     0: 'wc: Hebben jullie de handleiding aandachtig genoeg gelezen?',
                     1: 'wc: Education, je zoekt hier naar c=... . Cloud, Kijk even goed wat er allemaal gebeurt! Geef '
-                       'het wat tijd. Home, nul. Webshop, Probeer eens de hoodie te bestellen. Hier is nog een extra tip, indien je vast zit in het doolhof kan je in de helpdesk `appelsien` sturen. Een praesidium lid zal je dan verder helpen',
+                       'het wat tijd. Home, nul. Webshop, Probeer eens de hoodie te bestellen. Hier is nog een extra '
+                       'tip, indien je vast zit in het doolhof kan je in de helpdesk `appelsien` sturen. Een '
+                       'praesidium lid zal je dan verder helpen',
                     2: 'wc: De juiste cijfers zijn: 7 69 52 43. Zoek zelf maar uit welke A, B, C en D zijn'},
                 'vatenkot': {
-                    0: 'vatenkot: Herlees het gesprek nog eens, misschien heb je een tip gemist.',
+                    0: 'vatenkot: Simon of Thomas zit in het midden.',
                     1: 'vatenkot: Helemaal links zit Yorben en helemaal rechts zit Wout',
                     2: 'vatenkot: Yorben zit naast Bas en Jaro zit naast Wout'},
             }
@@ -422,10 +460,10 @@ class EscapeRoom:
                                           'tips voor een straftijd... '
             punishment = data['total_tips'] * 300
             reply += 'De totale straftijd die jullie krijgen is ' + str(
-                punishment) + ' seconden, dit brengt jullie totaal op: '
+                punishment/60) + ' minuten, dit brengt jullie totaal op: '
             data['duration'] += float(punishment)
-            reply += str(round(data['duration']/60)) + ' minuten.'
-            reply += '*door afrondingen kan het zijn dat de som hierboven niet lijkt te kloppen. De uiteindelijke score wordt berekent tot op de microseconde!'
+            reply += str(round(data['duration'] / 60)) + ' minuten.'
+            reply += '\n*door afrondingen kan het zijn dat de som hierboven niet lijkt te kloppen. De uiteindelijke score wordt berekent tot op de microseconde!'
         reply += '\n\nNu is het even wachten totdat de anderen klaar zijn, van zodra het zover is kan ik de winnaar ' \
                  'aankondigen! Alvast bedankt om mee te spelen en indien je nog graag wat blijft napraten dan kan dat ' \
                  'uiteraard! '
@@ -459,14 +497,20 @@ class EscapeRoom:
         return reply
 
     def get_scores(self):
-        reply = 'Live score bord'
+        reply = '```\nLive score bord'
         scores = []
         for team, data in self.team_channels.items():
             scores.append([data['status'], team, data['final_score']])
         # scores.sort(reverse=True)
         reply += '\n-----'
         for status, team, score in scores:
-            reply += '\n' + team + ': \tstatus: ' + str(status) + '\tscore: ' + str(score)
+            temp = ''
+            for i in range(32 - len(team)):
+                temp += ' '
+            reply += '\n' + team + ': ' + temp + 'status: ' + str(status) + '\tscore: ' + str(score) + '\n'
+            for i in range(70):
+                temp += '-'
+        reply += '\n```'
         return reply
 
     def meme(self, message):
