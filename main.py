@@ -260,7 +260,7 @@ async def on_message(message):
         # (Is the answer correct?, In what phase of the game are they now?, did they answer correctly?)
         if message.content == '!meme' or message.content == '!Meme':
             meme = escaperoom.meme(message)
-            await message.channel.send(file=discord.File(memes[meme]))
+            await message.channel.send(file=discord.File('pictures/'+memes[meme]))
             await asyncio.sleep(4)
             msg = await message.channel.history(limit=2).flatten()
             await message.channel.delete_messages(msg)
