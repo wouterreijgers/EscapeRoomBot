@@ -6,8 +6,8 @@ import discord
 from EscapeRoom import EscapeRoom
 from utils import Utils
 
-#Token that connects with the bot
-TOKEN = 'Nzc0NjA4NTIwMzM5MTI4MzIw.X6aQZg.7Lir-zWzwbhO1edzUmoXF-_4Kuo    '
+#Token that connects with the bot, goto discord developer and create credentials
+TOKEN = 'SECRET CODE'
 
 client = discord.Client()
 
@@ -167,6 +167,7 @@ async def on_message(message):
             await message.channel.send(escaperoom.get_scores())
         elif message.content == '!roles' or message.content == '!Roles':
             channel = client.get_channel(705172201472524300)
+            await channel.send(file=discord.File('logo.png'))
             await channel.send('Normaal gezien hebben jullie via mail een geheime code gekregen, stuur deze code hieronder en dan weet ik meteen waar ik je naartoe kan brengen! Indien er een probleem is stuur dan even een berichtje in de helpdesk.  Alvast veel succes!!!\n\n(ps: Je kan maar 1 keer sturen dus zorg dat je het juiste liedje ingeeft)')
             # m = channel.last_message
             # emoji = '1️⃣'
@@ -211,7 +212,7 @@ async def on_message(message):
                                'de deur heeft geschreven: a+bc-d². Waarschijnlijk dacht deze persoon dat hij of zij '
                                'de code de volgende ochtend niet meer zou weten. \n\nMeer info heb ik helaas ook '
                                'niet, ik heb wel de handleiding van het slot online gevonden: '
-                               'https://drive.google.com/file/d/1upGiAFJL--MXJlKuXfB3rjyMQnR2CmBi/view?usp=sharing ')
+                               'https://drive.google.com/file/d/1aJo8IB7e88vt2iflM2DNtFOqjGma1xxr/view?usp=sharing ')
             channel = client.get_channel(different_rooms['biokot']['channel_id'])
             await channel.send('\n5C46+98    :10u Bloed geven'
                                '\n5CPP+Q8    :16u Engineers of Tomorrow vergadering'

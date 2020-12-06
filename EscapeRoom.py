@@ -394,8 +394,9 @@ class EscapeRoom:
                     2: 'kp: Luister nog eens goed naar de voicemail'},
                 'wc': {
                     0: 'wc: Hebben jullie de handleiding aandachtig genoeg gelezen?',
-                    1: 'wc: Education, je zoekt hier naar c=... . Cloud, Kijk even goed wat er allemaal gebeurt! Geef '
-                       'het wat tijd. Home, nul. Webshop, Probeer eens de hoodie te bestellen. Hier is nog een extra '
+                    1: 'wc: Education, je zoekt hier naar c=... . Ons nieuwe praesidium lid heeft wel een hele '
+                       'vreemde functie. Home, nul. Webshop, Probeer eens de hoodie te bestellen. Hier is nog een '
+                       'extra '
                        'tip, indien je vast zit in het doolhof kan je in de helpdesk `appelsien` sturen. Een '
                        'praesidium lid zal je dan verder helpen',
                     2: 'wc: De juiste cijfers zijn: 7 69 52 43. Zoek zelf maar uit welke A, B, C en D zijn'},
